@@ -1,0 +1,212 @@
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Bitnami: Open Source. Simplified</title>
+  <link href="bitnami.css" media="all" rel="Stylesheet" type="text/css" /> 
+  <link href="/dashboard/stylesheets/all.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div class="contain-to-grid">
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="/dashboard/index.html">Apache Friends</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon">
+          <a href="#">
+            <span>Menu</span>
+          </a>
+        </li>
+      </ul>
+
+      <section class="top-bar-section">
+        
+        <ul class="right">
+          <li class="active"><a href="/applications.html">Applications</a></li>
+          <li class=""><a href="/dashboard/faq.html">FAQs</a></li>
+          <li class=""><a href="/dashboard/howto.html">HOW-TO Guides</a></li>
+          <li class=""><a target="_blank" href="/dashboard/phpinfo.php">PHPInfo</a></li>
+          <li class=""><a href="/phpmyadmin/">phpMyAdmin</a></li>
+        </ul>
+      </section>
+    </nav>
+  </div>
+  <div id="wrapper">
+    <div class="hero">
+       <div class="row">
+         <div class="large-12 columns">
+            <p>Apache Friends and Bitnami are cooperating to make dozens of open source applications available on XAMPP, for free. Bitnami-packaged applications include Wordpress, Drupal, Joomla! and dozens of others and can be deployed with one-click installers. Visit the <a href="https://bitnami.com/xampp?utm_source=bitnami&utm_medium=installer&utm_campaign=XAMPP%2BModule" target="_blank">Bitnami XAMPP page</a> for details on the currently available apps.</p><br/>
+            <p>Check out our <a href="https://www.apachefriends.org/bitnami_for_xampp.html" target="_blank" >Bitnami for XAMPP Start Guide</a> for more information about the applications installed.</p>
+         </div>
+       </div>
+    </div>
+    <div id="lowerContainer" class="row">
+      <div id="content" class="large-12 columns">
+          
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="row">
+          <div class="large-8 columns">
+            <ul class="social">
+              <li class="twitter"><a href="https://twitter.com/apachefriends">Follow us on Twitter</a></li>
+              <li class="facebook"><a href="https://www.facebook.com/we.are.xampp">Like us on Facebook</a></li>
+              <li class="google"><a href="https://plus.google.com/+xampp/posts">Add us to your G+ Circles</a></li>
+            </ul>
+
+            <ul class="inline-list">
+              <li><a href="https://www.apachefriends.org/blog.html">Blog</a></li>
+              <li><a href="https://www.apachefriends.org/privacy_policy.html">Privacy Policy</a></li>
+              <li>
+                <a target="_blank" href="http://www.fastly.com/">                    CDN provided by
+                  <img width="48" data-2x="/dashboard/images/fastly-logo@2x.png" src="/dashboard/images/fastly-logo.png" />
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="large-4 columns">
+            <p class="text-right">Copyright (c) 2015, Apache Friends</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cess Notices</title>
+    <link rel="stylesheet" type="text/css" href="bitnami.css">
+</head>
+<body>
+    <h1>Cess Notices</h1>
+    
+    <div>
+        <label for="type">Type:</label>
+        <select id="type">
+            <option value="cess">Cess</option>
+        </select>
+    </div>
+    <div>
+        <label for="district">District:</label>
+        <select id="district">
+            <option value="north">North</option>
+            <option value="south">South</option>
+            <option value="east">East</option>
+            <option value="northwest">North-West</option>
+            <option value="southwest">South-West</option>
+            <option value="northeast">North-East</option>
+            <option value="southeast">South-East</option>
+        </select>
+    </div>
+    <div>
+        <label for="date">Date (DD/MM/YYYY):</label>
+        <input type="text" id="date" placeholder="Enter Date">
+    </div>
+    <div>
+        <label for="company">Company Name:</label>
+        <input type="text" id="company" placeholder="Enter Company Name">
+    </div>
+    <div>
+        <label for="serialNumber">Cess ID:</label>
+        <input type="text" id="serialNumber" readonly>
+    </div>
+    <button onclick="generateResult()">Submit</button>
+    <button onclick="resetForm()">Reset</button>
+    
+    <script>
+        let queryCount = 0;
+
+        function insertDataIntoDatabase(type, district, formattedDate, company) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'index.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Data was successfully inserted into the database
+                        console.log('Data inserted into the database.');
+                    } else {
+                        // Handle errors if any
+                        console.error('Error inserting data into the database.');
+                    }
+                }
+            };
+
+            const formData = `type=${type}&district=${district}&date=${formattedDate}&company=${company}`;
+            xhr.send(formData);
+        }
+    
+        function generateResult() {
+            queryCount++;
+            const type = document.getElementById("type").value;
+            const district = document.getElementById("district").value;
+            const date = document.getElementById("date").value;
+            const company = document.getElementById("company").value;
+            
+            const dateParts = date.split('/');
+            const day = parseInt(dateParts[0], 10);
+            const month = parseInt(dateParts[1], 10) - 1; // Months are zero-based
+            const year = parseInt(dateParts[2], 10);
+
+            if (isNaN(day) || isNaN(month) || isNaN(year) || month < 0 || month > 11 || day < 1 || day > 31) {
+                alert("Invalid! Please enter a valid date (DD/MM/YYYY).");
+                return;
+            }   
+
+            const inputDate = new Date(year, month, day);
+
+            const formattedDate = date.replace(/\//g, '');
+
+            const serialNumber = queryCount;
+            const result = `${type}/${district}/${company}/${formattedDate}/${serialNumber}`;
+            document.getElementById("serialNumber").value = result;
+
+            insertDataIntoDatabase(type, district, formattedDate, company);
+        }
+
+        function resetForm() {
+            document.getElementById("type").value = "cess";
+            document.getElementById("district").value = "north";
+            document.getElementById("date").value = "";
+            document.getElementById("company").value = "";
+            document.getElementById("serialNumber").value = "";
+        }
+
+        function insertDataIntoDatabase(type, district, formattedDate, company) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'index.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // Data was successfully inserted into the database
+                    console.log('Data inserted into the database.');
+                } else {
+                    // Handle errors if any
+                    console.error('Error inserting data into the database.');
+                }
+            }
+        };
+
+        const formData = `type=${type}&district=${district}&date=${formattedDate}&company=${company}`;
+        xhr.send(formData);
+    }
+
+
+    </script>
+    
+</body>
+</html>
+
+
