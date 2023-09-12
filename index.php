@@ -53,7 +53,7 @@
 //?>
  -->
 
- //mongodb+srv://ak511046:<password>@cluster0.s3qwqlk.mongodb.net/
+
 
 
  <?php
@@ -64,7 +64,7 @@ $mongoDatabase = 'cess'; // Your MongoDB database name
 
 // Connect to MongoDB
 try {
-    $mongoClient = new MongoDB\Client("mongodb://$mongoHost:$mongoPort");
+    $mongoClient = new MongoDB\Client("mongodb+srv://ak5110467:iMAXJdpMFw6I6kTL@cluster0.s3qwqlk.mongodb.net/");
     $db = $mongoClient->$mongoDatabase;
 } catch (MongoDB\Driver\Exception\Exception $e) {
     die('Error connecting to MongoDB: ' . $e->getMessage());
