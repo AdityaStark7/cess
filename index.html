@@ -126,6 +126,8 @@
         let queryCount = 0;
 
         function insertDataIntoDatabase(type, district, formattedDate, company) {
+
+            console.log('insertDataIntoDatabase called');
             const xhr = new XMLHttpRequest();
             xhr.open('POST', 'index.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -143,6 +145,8 @@
             };
 
             const formData = `type=${type}&district=${district}&date=${formattedDate}&company=${company}`;
+
+          console.log(formData);
             xhr.send(formData);
         }
     
