@@ -182,27 +182,6 @@
             document.getElementById("serialNumber").value = "";
         }
 
-        function insertDataIntoDatabase(type, district, formattedDate, company) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'index.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    // Data was successfully inserted into the database
-                    console.log('Data inserted into the database.');
-                } else {
-                    // Handle errors if any
-                    console.error('Error inserting data into the database.');
-                }
-            }
-        };
-
-        const formData = `type=${type}&district=${district}&date=${formattedDate}&company=${company}`;
-        xhr.send(formData);
-    }
-
 
     </script>
     
